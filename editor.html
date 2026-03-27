@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write - ThinkSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-slate: #0F172A;
+            --soft-white: #F8FAFC;
+            --muted-blue: #2563EB;
+            --light-gray: #F1F5F9;
+            --border-gray: #E2E8F0;
+            --text-gray: #64748B;
+            --success-green: #059669;
+            --warning-amber: #D97706;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+            background: var(--soft-white);
+            color: var(--deep-slate);
+            line-height: 1.6;
+        }
+
+        
+
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border-gray);
+            padding: var(--spacing-sm) 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--deep-slate);
+            letter-spacing: -0.02em;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--deep-slate);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+
+        .save-btn {
+            background: var(--muted-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 14px;
+        }
+
+        .save-btn:hover {
+            background: #1e40af;
+            transform: translateY(-1px);
+        }
+
+        .save-btn:disabled {
+            background: var(--border-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        
+
+        .editor-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--spacing-md);
+        }
+
+        
+        .editor-header {
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--deep-slate);
+        }
+
+        .editor-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--deep-slate);
+            margin-bottom: var(--spacing-xs);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .editor-subtitle {
+            color: var(--text-gray);
+            font-size: 15px;
+        }
+
+        
+
+
+        .progress-container {
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .progress-label {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-xs);
+            font-family: 'IBM Plex Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--muted-blue);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-sm);
+            font-size: 12px;
+        }
+
+        .step {
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .step.complete {
+            color: var(--success-green);
+        }
+
+        .step-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--border-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .step.complete .step-icon {
+            background: var(--success-green);
+            border-color: var(--success-green);
+            color: white;
+        }
+
+        
+
+        .section-card {
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            transition: all 0.3s;
+        }
+
+        .section-card.focused {
+            border-color: var(--muted-blue);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--deep-slate);
+            font-family: 'IBM Plex Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .required-badge {
+            background: var(--warning-amber);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: var(--text-gray);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .section-description {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-sm);
+            background: var(--light-gray);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 4px;
+            border-left: 3px solid var(--muted-blue);
+        }
+
+        
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 15px;
+            color: var(--deep-slate);
+            background: white;
+            transition: all 0.2s;
+            resize: vertical;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--muted-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-large {
+            font-size: 20px;
+            font-weight: 600;
+            padding: 16px;
+        }
+
+        textarea {
+            min-height: 120px;
+            line-height: 1.6;
+        }
+
+        textarea.tall {
+            min-height: 180px;
+        }
+
+        
+        .evidence-container {
+            background: var(--light-gray);
+            padding: var(--spacing-md);
+            border-radius: 6px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .evidence-block {
+            background: white;
+            padding: var(--spacing-sm);
+            border-radius: 6px;
+            border: 1px solid var(--border-gray);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .evidence-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .evidence-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .evidence-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--deep-slate);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px 8px;
+            transition: color 0.2s;
+        }
+
+        .remove-btn:hover {
+            color: #dc2626;
+        }
+
+        .input-group {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .input-label {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 2px dashed var(--border-gray);
+            border-radius: 6px;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .add-btn:hover {
+            border-color: var(--muted-blue);
+            color: var(--muted-blue);
+            background: var(--light-gray);
+        }
+
+        
+        .reference-list {
+            background: var(--light-gray);
+            padding: var(--spacing-md);
+            border-radius: 6px;
+        }
+
+        .reference-item {
+            background: white;
+            padding: var(--spacing-sm);
+            border-radius: 4px;
+            border: 1px solid var(--border-gray);
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: flex-start;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            color: var(--muted-blue);
+            font-size: 12px;
+            min-width: 20px;
+        }
+
+        .reference-input {
+            flex: 1;
+        }
+
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-sm);
+            background: var(--light-gray);
+            border-radius: 6px;
+            min-height: 50px;
+            align-items: flex-start;
+        }
+
+        .tag-item {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border-gray);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag-remove {
+            cursor: pointer;
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .tag-remove:hover {
+            color: #dc2626;
+        }
+
+        .tag-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 6px 12px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            min-width: 120px;
+        }
+
+        .tag-input:focus {
+            outline: none;
+        }
+
+        
+        .validation-message {
+            font-size: 12px;
+            color: #dc2626;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .validation-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .editor-container {
+                padding: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ThinkSpace</div>
+            <div class="nav-links">
+                <a href="thinkspace.html">Explore</a>
+                <a href="editor.html" class="active">Write</a>
+                <a href="#">Debates</a>
+            </div>
+            <div class="nav-right">
+                <button class="save-btn" id="saveBtn">Publish Article</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="editor-container">
+        <div class="editor-header">
+            <h1 class="editor-title">Structured Article Editor</h1>
+            <p class="editor-subtitle">Each section enforces logical thinking. Complete all required sections to publish.</p>
+        </div>
+
+
+        <div class="progress-container">
+            <div class="progress-label">Completion Progress</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+                <div class="step" id="step1">
+                    <span class="step-icon">1</span>
+                    <span>Title</span>
+                </div>
+                <div class="step" id="step2">
+                    <span class="step-icon">2</span>
+                    <span>Thesis</span>
+                </div>
+                <div class="step" id="step3">
+                    <span class="step-icon">3</span>
+                    <span>Evidence</span>
+                </div>
+                <div class="step" id="step4">
+                    <span class="step-icon">4</span>
+                    <span>Counter</span>
+                </div>
+                <div class="step" id="step5">
+                    <span class="step-icon">5</span>
+                    <span>Rebuttal</span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="section-card" id="titleSection">
+            <div class="section-header">
+                <div class="section-title">
+                    01. Article Title
+                    <span class="required-badge">Required</span>
+                </div>
+                <span class="char-count" id="titleCount">0 / 120</span>
+            </div>
+            <input 
+                type="text" 
+                class="input-large" 
+                id="titleInput"
+                placeholder="State your main argument clearly and concisely"
+                maxlength="120"
+            >
+            <div class="validation-message" id="titleError">Title must be at least 20 characters</div>
+        </div>
+
+        
+        <div class="section-card" id="thesisSection">
+            <div class="section-header">
+                <div class="section-title">
+                    02. Thesis Statement
+                    <span class="required-badge">Required</span>
+                </div>
+                <span class="char-count" id="thesisCount">0 / 500</span>
+            </div>
+            <div class="section-description">
+                Your central argument. What are you claiming? Be specific and falsifiable.
+            </div>
+            <textarea 
+                id="thesisInput" 
+                class="tall"
+                placeholder="Example: 'Gradual carbon pricing (increasing 5% annually) is more politically sustainable and economically effective than immediate high-tax implementation, based on comparative analysis of France, Canada, and Sweden's policies from 2015-2024.'"
+                maxlength="500"
+            ></textarea>
+            <div class="validation-message" id="thesisError">Thesis must be at least 100 characters</div>
+        </div>
+
+        
+        <div class="section-card" id="evidenceSection">
+            <div class="section-header">
+                <div class="section-title">
+                    03. Evidence & Sources
+                    <span class="required-badge">Required</span>
+                </div>
+            </div>
+            <div class="section-description">
+                Provide verifiable evidence supporting your thesis. Include source URLs and explain how each piece supports your argument.
+            </div>
+            <div class="evidence-container" id="evidenceContainer">
+                <!-- Evidence blocks will be added here dynamically -->
+            </div>
+            <button class="add-btn" onclick="addEvidenceBlock()">+ Add Evidence Block</button>
+            <div class="validation-message" id="evidenceError">Add at least 2 evidence blocks</div>
+        </div>
+
+
+        <div class="section-card" id="counterSection">
+            <div class="section-header">
+                <div class="section-title">
+                    04. Counterargument
+                    <span class="required-badge">Required</span>
+                </div>
+                <span class="char-count" id="counterCount">0 / 400</span>
+            </div>
+            <div class="section-description">
+                Steelman the opposing view. What's the strongest argument against your thesis?
+            </div>
+            <textarea 
+                id="counterInput"
+                placeholder="Example: 'Critics argue that gradual implementation allows carbon-intensive industries to delay transition, potentially missing critical climate deadlines. The IPCC 2023 report emphasizes urgency, suggesting immediate action is necessary regardless of political palatability.'"
+                maxlength="400"
+            ></textarea>
+            <div class="validation-message" id="counterError">Counterargument must be at least 80 characters</div>
+        </div>
+
+        
+
+        <div class="section-card" id="rebuttalSection">
+            <div class="section-header">
+                <div class="section-title">
+                    05. Rebuttal
+                    <span class="required-badge">Required</span>
+                </div>
+                <span class="char-count" id="rebuttalCount">0 / 400</span>
+            </div>
+            <div class="section-description">
+                Respond to the counterargument. Why does your thesis still hold despite opposition?
+            </div>
+            <textarea 
+                id="rebuttalInput"
+                placeholder="Example: 'While urgency is real, failed policy attempts set back climate action by years. France's gilets jaunes protests (2018-2019) directly resulted from rushed carbon tax implementation, forcing government reversal. Sweden's gradual 30-year approach achieved 25% emissions reduction while maintaining public support—demonstrating that sustained moderate action outperforms abandoned ambitious targets.'"
+                maxlength="400"
+            ></textarea>
+            <div class="validation-message" id="rebuttalError">Rebuttal must be at least 80 characters</div>
+        </div>
+
+        
+        
+        <div class="section-card" id="referencesSection">
+            <div class="section-header">
+                <div class="section-title">
+                    06. References
+                    <span class="required-badge">Required</span>
+                </div>
+            </div>
+            <div class="section-description">
+                List all sources cited in your article. Include full URLs.
+            </div>
+            <div class="reference-list" id="referenceList">
+                <!-- References, added here -->
+            </div>
+            <button class="add-btn" onclick="addReference()">+ Add Reference</button>
+            <div class="validation-message" id="referencesError">Add at least 3 references</div>
+        </div>
+
+
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-title">07. Tags</div>
+            </div>
+            <div class="section-description">
+                Add relevant topics (press Enter after each tag)
+            </div>
+            <div class="tag-container" id="tagContainer">
+                <input 
+                    type="text" 
+                    class="tag-input" 
+                    id="tagInput"
+                    placeholder="Type a tag and press Enter"
+                >
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let evidenceCount = 0;
+        let referenceCount = 0;
+        let tags = [];
+
+        window.onload = function() {
+            addEvidenceBlock();
+            addReference();
+            addReference();
+            addReference();
+            updateProgress();
+        };
+
+        document.getElementById('titleInput').addEventListener('input', function(e) {
+            document.getElementById('titleCount').textContent = e.target.value.length + ' / 120';
+            updateProgress();
+        });
+
+        document.getElementById('thesisInput').addEventListener('input', function(e) {
+            document.getElementById('thesisCount').textContent = e.target.value.length + ' / 500';
+            updateProgress();
+        });
+
+        document.getElementById('counterInput').addEventListener('input', function(e) {
+            document.getElementById('counterCount').textContent = e.target.value.length + ' / 400';
+            updateProgress();
+        });
+
+        document.getElementById('rebuttalInput').addEventListener('input', function(e) {
+            document.getElementById('rebuttalCount').textContent = e.target.value.length + ' / 400';
+            updateProgress();
+        });
+
+        // Add evidence block
+        function addEvidenceBlock() {
+            evidenceCount++;
+            const container = document.getElementById('evidenceContainer');
+            const block = document.createElement('div');
+            block.className = 'evidence-block';
+            block.innerHTML = `
+                <div class="evidence-header">
+                    <span class="evidence-label">Evidence ${evidenceCount}</span>
+                    <button class="remove-btn" onclick="removeEvidenceBlock(this)">×</button>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Source URL</label>
+                    <input type="text" placeholder="https://..." onchange="updateProgress()">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Evidence Explanation</label>
+                    <textarea placeholder="Explain how this source supports your thesis..." onchange="updateProgress()"></textarea>
+                </div>
+            `;
+            container.appendChild(block);
+            updateProgress();
+        }
+
+        function removeEvidenceBlock(btn) {
+            if (document.querySelectorAll('.evidence-block').length > 1) {
+                btn.closest('.evidence-block').remove();
+                updateProgress();
+            }
+        }
+
+        function addReference() {
+            referenceCount++;
+            const container = document.getElementById('referenceList');
+            const ref = document.createElement('div');
+            ref.className = 'reference-item';
+            ref.innerHTML = `
+                <span class="reference-number">[${referenceCount}]</span>
+                <input type="text" class="reference-input" placeholder="https://example.com/source" onchange="updateProgress()">
+                <button class="remove-btn" onclick="removeReference(this)">×</button>
+            `;
+            container.appendChild(ref);
+            updateProgress();
+        }
+
+        function removeReference(btn) {
+            if (document.querySelectorAll('.reference-item').length > 1) {
+                btn.closest('.reference-item').remove();
+                renumberReferences();
+                updateProgress();
+            }
+        }
+
+        function renumberReferences() {
+            const refs = document.querySelectorAll('.reference-number');
+            refs.forEach((ref, index) => {
+                ref.textContent = `[${index + 1}]`;
+            });
+            referenceCount = refs.length;
+        }
+
+        
+
+        function validateURL(url) {
+            // Check if URL starts with http:// or https:// 
+            const urlPattern = /^https?:\/\/.+\..+/;
+            return urlPattern.test(url);
+        }
+
+        document.addEventListener('input', function(e) {
+            if (e.target.type === 'text' && 
+                (e.target.placeholder.includes('https://') || 
+                 e.target.classList.contains('reference-input'))) {
+                
+                const url = e.target.value.trim();
+                
+                if (url.length > 0) {
+                    if (validateURL(url)) {
+                        e.target.style.borderColor = '#059669';
+                        e.target.style.borderWidth = '2px';
+                    } else {
+                        e.target.style.borderColor = '#dc2626';
+                        e.target.style.borderWidth = '2px';
+                    }
+                } else {
+                    e.target.style.borderColor = '#E2E8F0';
+                    e.target.style.borderWidth = '1px';
+                }
+            }
+        });
+
+
+        // Tag handling
+        document.getElementById('tagInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = this.value.trim();
+                if (value && !tags.includes(value)) {
+                    tags.push(value);
+                    addTag(value);
+                    this.value = '';
+                }
+            }
+        });
+
+        function addTag(value) {
+            const container = document.getElementById('tagContainer');
+            const tagInput = document.getElementById('tagInput');
+            const tag = document.createElement('div');
+            tag.className = 'tag-item';
+            tag.innerHTML = `
+                <span>${value}</span>
+                <span class="tag-remove" onclick="removeTag(this, '${value}')">×</span>
+            `;
+            container.insertBefore(tag, tagInput);
+        }
+
+        function removeTag(btn, value) {
+            tags = tags.filter(t => t !== value);
+            btn.closest('.tag-item').remove();
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            const title = document.getElementById('titleInput').value;
+            const thesis = document.getElementById('thesisInput').value;
+            const evidenceBlocks = document.querySelectorAll('.evidence-block');
+            const counter = document.getElementById('counterInput').value;
+            const rebuttal = document.getElementById('rebuttalInput').value;
+            const references = document.querySelectorAll('.reference-input');
+
+            let completed = 0;
+            const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+
+            // Check title
+            if (title.length >= 20) {
+                completed++;
+                document.getElementById('step1').classList.add('complete');
+            } else {
+                document.getElementById('step1').classList.remove('complete');
+            }
+
+            // Check thesis
+            if (thesis.length >= 100) {
+                completed++;
+                document.getElementById('step2').classList.add('complete');
+            } else {
+                document.getElementById('step2').classList.remove('complete');
+            }
+
+            // Check evidence
+            let evidenceFilled = 0;
+            evidenceBlocks.forEach(block => {
+                const url = block.querySelector('input[type="text"]').value;
+                const explanation = block.querySelector('textarea').value;
+                if (url.length > 0 && explanation.length >= 50) {
+                    evidenceFilled++;
+                }
+            });
+            if (evidenceFilled >= 2) {
+                completed++;
+                document.getElementById('step3').classList.add('complete');
+            } else {
+                document.getElementById('step3').classList.remove('complete');
+            }
+
+            // Check counterargument
+            if (counter.length >= 80) {
+                completed++;
+                document.getElementById('step4').classList.add('complete');
+            } else {
+                document.getElementById('step4').classList.remove('complete');
+            }
+
+            // Check rebuttal
+            if (rebuttal.length >= 80) {
+                completed++;
+                document.getElementById('step5').classList.add('complete');
+            } else {
+                document.getElementById('step5').classList.remove('complete');
+            }
+
+            // Update progress bar
+            const percentage = (completed / 5) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+
+            // Enable/disable save button
+            const saveBtn = document.getElementById('saveBtn');
+            if (completed === 5) {
+                saveBtn.disabled = false;
+            } else {
+                saveBtn.disabled = true;
+            }
+        }
+
+        // Save functionality
+        document.getElementById('saveBtn').addEventListener('click', function() {
+            alert('Article structure validated! In the full version, this would save to database.\n\nYour structured article is ready for publication.');
+        });
+
+        // Focus effects
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.closest('.section-card').classList.add('focused');
+            });
+            element.addEventListener('blur', function() {
+                this.closest('.section-card').classList.remove('focused');
+            });
+        });
+
+        document.getElementById('profileLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (loggedInUser) {
+                window.location.href = 'profile.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

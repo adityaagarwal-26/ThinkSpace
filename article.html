@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - ThinkSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="article-styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="thinkspace.html" class="logo">ThinkSpace</a>
+            <div class="nav-links">
+                <a href="thinkspace.html">Explore</a>
+                <a href="editor.html">Write</a>
+                <a href="#">Debates</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1 class="article-title">The Case for Gradual Carbon Pricing: Why Shock Therapy Fails</h1>
+            
+            <div class="article-meta">
+                <div class="author-section">
+                    <div class="author-avatar">JK</div>
+                    <div>
+                        <div class="author-name">Jane Keller</div>
+                        <div class="author-cred">Credibility Score: 94</div>
+                    </div>
+                </div>
+                <div class="article-stats">
+                    <div>Published 4 hours ago</div>
+                    <div>4 Sections • 12 Sources</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">01 • Thesis</div>
+            <div class="section-content">
+                <p>Rapid carbon tax implementation creates political backlash that undermines long-term climate goals. Evidence from France's fuel tax protests (2018-2019) and Canada's provincial resistance suggests that gradual implementation—starting at lower rates and increasing 5-10% annually—is more politically sustainable and economically effective than immediate high-tax policies. While climate urgency demands action, failed policy attempts set back progress by years. A measured approach maintains public support while achieving meaningful emissions reductions.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">02 • Evidence</div>
+            <h2 class="section-title">Supporting Evidence</h2>
+            
+            <div class="evidence-block">
+                <div class="evidence-source">
+                    <strong>Source 1:</strong> <a href="#">https://nature.com/climate-policy-2024</a>
+                </div>
+                <div class="evidence-text">
+                    France's attempt to implement a sudden fuel tax increase in 2018 led to the "gilets jaunes" (yellow vest) protests, forcing the government to completely reverse the policy. This set back France's climate agenda by an estimated 3-5 years and increased public skepticism toward climate policy.
+                </div>
+            </div>
+
+            <div class="evidence-block">
+                <div class="evidence-source">
+                    <strong>Source 2:</strong> <a href="#">https://canadianpolicy.org/carbon-tax-analysis</a>
+                </div>
+                <div class="evidence-text">
+                    Canada's gradual carbon tax approach, starting at $20/ton in 2019 and increasing $10 annually, maintained 68% public support compared to 41% support for immediate high-tax proposals. The gradual approach allowed businesses time to adapt and consumers to adjust behavior without economic shock.
+                </div>
+            </div>
+
+        <div class="section">
+            <div class="section-label">03 • Counterargument</div>
+            <h2 class="section-title">Opposing View</h2>
+            <div class="section-content">
+                <p>Critics argue that gradual implementation allows carbon-intensive industries to delay transition, potentially missing critical climate deadlines. The IPCC 2023 report emphasizes urgency, suggesting that immediate aggressive action is necessary regardless of political palatability. They contend that the climate crisis demands bold action now, not incremental steps that may be too little, too late. Political concerns, while real, should not override scientific necessity.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">04 • Rebuttal</div>
+            <h2 class="section-title">Response to Opposition</h2>
+            <div class="section-content">
+                <p>While urgency is real, failed policy attempts set back climate action more than gradual approaches. France's reversal after protests meant zero carbon pricing for multiple years—worse than starting low and increasing steadily. Sweden's 30-year gradual approach achieved 25% emissions reduction while France's aggressive attempt resulted in policy abandonment. The question isn't bold vs. cautious, but sustained vs. abandoned. Gradual implementation demonstrates that consistent moderate action outperforms failed ambitious targets. Political sustainability isn't a luxury—it's a requirement for long-term policy success.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">05 • References</div>
+            <h2 class="section-title">Sources Cited</h2>
+            <ol class="reference-list">
+                <li><a href="#">https://nature.com/climate-policy-2024</a></li>
+                <li><a href="#">https://canadianpolicy.org/carbon-tax-analysis</a></li>
+                <li><a href="#">https://swedenclimate.gov.se/policy-history</a></li>
+                <li><a href="#">https://canadianpolicy.org/carbon-tax-analysis</a></li>
+                <li><a href="#">https://nature.com/climate-policy-2024</a></li>
+            </ol>
+        </div>
+
+        <div class="tags-section">
+            <span class="tag">Climate Policy</span>
+            <span class="tag">Economics</span>
+            <span class="tag">Public Policy</span>
+        </div>
+
+        <div class="action-bar">
+            <button class="upvote-btn">|^| Upvote (248)</button>
+            <button class="share-btn">Start Debate</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('profileLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (loggedInUser) {
+                window.location.href = 'profile.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

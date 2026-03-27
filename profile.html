@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ThinkSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="profile-styles.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="thinkspace.html" class="logo">ThinkSpace</a>
+            <div class="nav-links">
+                <a href="thinkspace.html">Explore</a>
+                <a href="editor.html">Write</a>
+                <a href="#">Debates</a>
+                <a href="profile.html">Profile</a>
+            </div>
+            <div style="margin-left: auto;">
+                <button id="logoutBtn" style="background: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-top">
+                <div class="profile-avatar">JK</div>
+                <div class="profile-info">
+                    <h1>Jane Keller</h1>
+                    <p class="profile-bio">Climate economist focused on policy implementation and political sustainability. Writing about evidence-based approaches to environmental challenges.</p>
+                    <p class="profile-joined">Joined March 2025</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">94</div>
+                    <div class="stat-label">Credibility Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Articles Published</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4.2</div>
+                    <div class="stat-label">Avg Sections</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="articles-section">
+            <h2 class="section-title">Published Articles</h2>
+            
+            <div class="article-list">
+
+                <div class="article-item" onclick="window.location.href='article.html'">
+                    <h3 class="article-item-title">The Case for Gradual Carbon Pricing: Why Shock Therapy Fails</h3>
+                    <p class="article-item-excerpt">Rapid carbon tax implementation creates political backlash that undermines long-term climate goals. Evidence from France's fuel tax protests and Canada's provincial resistance suggests gradual implementation is more sustainable.</p>
+                    <div class="article-item-meta">
+                        <span>4 hours ago</span>
+                        <span>4 Sections</span>
+                        <span>12 Sources</span>
+                        <span>⬆ 248</span>
+                    </div>
+                    <div class="article-item-tags">
+                        <span class="tag">Climate Policy</span>
+                        <span class="tag">Economics</span>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <h3 class="article-item-title">Renewable Energy Storage: The Missing Piece in Climate Solutions</h3>
+                    <p class="article-item-excerpt">Solar and wind alone cannot solve climate change without breakthrough storage technology. Current battery limitations and grid stability challenges require immediate research investment.</p>
+                    <div class="article-item-meta">
+                        <span>2 days ago</span>
+                        <span>5 Sections</span>
+                        <span>15 Sources</span>
+                        <span>⬆ 187</span>
+                    </div>
+                    <div class="article-item-tags">
+                        <span class="tag">Technology</span>
+                        <span class="tag">Energy</span>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <h3 class="article-item-title">Carbon Offsets: Effective Tool or Corporate Greenwashing?</h3>
+                    <p class="article-item-excerpt">Analysis of carbon offset programs reveals significant verification challenges. While some projects deliver real climate benefits, many lack proper monitoring and additionality proof.</p>
+                    <div class="article-item-meta">
+                        <span>5 days ago</span>
+                        <span>4 Sections</span>
+                        <span>10 Sources</span>
+                        <span>⬆ 156</span>
+                    </div>
+                    <div class="article-item-tags">
+                        <span class="tag">Climate Policy</span>
+                        <span class="tag">Business</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Checking, user is logged in
+        window.onload = function() {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (!loggedInUser) {
+                // Not logged in, redirect to login page
+                window.location.href = 'login.html';
+            } else {
+                document.getElementById('logoutBtn').style.display = 'block';
+            }
+        };
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('loggedInUser');
+            localStorage.removeItem('loginTime');
+            
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

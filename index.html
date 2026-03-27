@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ThinkSpace</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login-styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <div class="logo">ThinkSpace</div>
+                <div class="logo-subtitle">Structured Rational Discourse</div>
+            </div>
+
+            <div class="demo-notice">
+                <strong>📚 Demo Mode</strong><br>
+                This is a frontend demonstration. No real authentication.
+                <div class="demo-credentials">
+                    Username: <strong>jane</strong><br>
+                    Password: <strong>demo123</strong>
+                </div>
+            </div>
+
+            <h2>Login to Continue</h2>
+
+            <div class="error-message" id="errorMsg">
+                Invalid username or password
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <div class="back-link">
+                <a href="thinkspace.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DEMO_USERS = {
+            'jane': 'demo123',
+            'admin': 'admin123'
+        };
+
+        window.onload = function() {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                window.location.href = 'profile.html';
+            }
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (DEMO_USERS[username] && DEMO_USERS[username] === password) {
+                localStorage.setItem('loggedInUser', username);
+                localStorage.setItem('loginTime', new Date().toISOString());
+                
+                window.location.href = 'profile.html';
+            } else {
+                errorMsg.classList.add('show');
+                
+                document.getElementById('loginForm').style.animation = 'shake 0.3s';
+                setTimeout(() => {
+                    document.getElementById('loginForm').style.animation = '';
+                }, 300);
+            }
+        });
+
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMsg').classList.remove('show');
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMsg').classList.remove('show');
+        });
+    </script>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</body>
+</html>

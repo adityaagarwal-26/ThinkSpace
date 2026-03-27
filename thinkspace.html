@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinkSpace - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="feed-styles.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ThinkSpace</div>
+            <div class="nav-links">
+                <a href="thinkspace.html">Explore</a>
+                <a href="editor.html">Write</a>
+                <a href="#">Debates</a>
+                <a href="profile.html">Profile</a>
+            </div>
+            <div class="nav-right">
+                <div class="icon-btn">🔔</div>
+                <div class="icon-btn" onclick="window.location.href='profile.html'" style="cursor: pointer;">👤</div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-title">Trending Topics</div>
+            <ul class="sidebar-list">
+                <li><a href="#">Climate Policy <span class="count">142</span></a></li>
+                <li><a href="#">AI Regulation <span class="count">98</span></a></li>
+                <li><a href="#">Economic Reform <span class="count">76</span></a></li>
+                <li><a href="#">Education Systems <span class="count">63</span></a></li>
+            </ul>
+            
+            <div style="margin-top: 30px;">
+                <div class="sidebar-title">Popular Tags</div>
+                <div>
+                    <span class="tag">Economics</span>
+                    <span class="tag">Policy</span>
+                    <span class="tag">Science</span>
+                    <span class="tag">Technology</span>
+                    <span class="tag">Philosophy</span>
+                </div>
+            </div>
+        </aside>
+
+
+        <main class="feed">
+            <div class="feed-header">
+                <h1 class="feed-title">Recent Articles</h1>
+                <button class="sort-btn">Sort by Quality ↓</button>
+            </div>
+
+
+            <article class="article-card" onclick="window.location.href='article.html'">
+                <div class="article-header">
+                    <div class="author-avatar">JK</div>
+                    <div class="author-info">
+                        <div class="author-name">
+                            Jane Keller
+                            <span class="credibility-badge">★ 94</span>
+                        </div>
+                        <div class="article-time">4 hours ago</div>
+                    </div>
+                </div>
+                <h2 class="article-title">The Case for Gradual Carbon Pricing: Why Shock Therapy Fails</h2>
+                <p class="article-thesis">Rapid carbon tax implementation creates political backlash that undermines long-term climate goals. Evidence from France's fuel tax protests and Canada's provincial resistance suggests gradual implementation is more sustainable.</p>
+                <div class="article-tags">
+                    <span class="tag">Climate Policy</span>
+                    <span class="tag">Economics</span>
+                </div>
+                <div class="article-meta">
+                    <span class="meta-item">📋 4 Sections</span>
+                    <span class="meta-item">📚 12 Sources</span>
+                    <button class="quality-btn">⬆️ 248</button>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-header">
+                    <div class="author-avatar">MB</div>
+                    <div class="author-info">
+                        <div class="author-name">
+                            Marcus Brennan
+                            <span class="credibility-badge">★ 87</span>
+                        </div>
+                        <div class="article-time">6 hours ago</div>
+                    </div>
+                </div>
+                <h2 class="article-title">Rethinking University Admissions: Merit vs. Lottery Systems</h2>
+                <p class="article-thesis">When applicant pools exceed quality thresholds, random selection may be more equitable than marginal distinctions. Analysis of Dutch and Danish lottery systems shows unexpected benefits.</p>
+                <div class="article-tags">
+                    <span class="tag">Education</span>
+                    <span class="tag">Policy</span>
+                </div>
+                <div class="article-meta">
+                    <span class="meta-item">📋 5 Sections</span>
+                    <span class="meta-item">📚 8 Sources</span>
+                    <button class="quality-btn">⬆️192</button>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-header">
+                    <div class="author-avatar">AL</div>
+                    <div class="author-info">
+                        <div class="author-name">
+                            Aisha Laurent
+                            <span class="credibility-badge">★ 91</span>
+                        </div>
+                        <div class="article-time">8 hours ago</div>
+                    </div>
+                </div>
+                <h2 class="article-title">Why AI Safety Researchers Disagree: A Taxonomy of Risk Models</h2>
+                <p class="article-thesis">The AI safety community isn't divided on whether risks exist, but on which risks matter most. Mapping the spectrum from capability overhang to value alignment reveals different priorities.</p>
+                <div class="article-tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Technology</span>
+                </div>
+                <div class="article-meta">
+                    <span class="meta-item">📋 6 Sections</span>
+                    <span class="meta-item">📚 15 Sources</span>
+                    <button class="quality-btn">⬆️ 334</button>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar featured-section">
+            <div class="sidebar-title">Featured Contributors</div>
+            <div class="voice-item">
+                <div class="voice-avatar"></div>
+                <div>
+                    <div class="voice-name">Dr. Chen Wu</div>
+                    <div class="voice-desc">Climate Economist</div>
+                </div>
+            </div>
+            <div class="voice-item">
+                <div class="voice-avatar"></div>
+                <div>
+                    <div class="voice-name">Sofia Ruiz</div>
+                    <div class="voice-desc">Policy Analyst</div>
+                </div>
+            </div>
+            <div class="voice-item">
+                <div class="voice-avatar"></div>
+                <div>
+                    <div class="voice-name">James Okafor</div>
+                    <div class="voice-desc">Tech Ethics</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        document.getElementById('profileLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (loggedInUser) {
+                window.location.href = 'profile.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.querySelectorAll('.icon-btn')[1].addEventListener('click', function() {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            
+            if (loggedInUser) {
+                window.location.href = 'profile.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>
